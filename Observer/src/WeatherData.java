@@ -1,6 +1,8 @@
+package src;
+
 import java.util.ArrayList;
 
-public class WeatherData implements Subject{
+public class WeatherData implements Subject {
 	private ArrayList<Observer> observers;
 	private double tempereture;
 	private double humidity;

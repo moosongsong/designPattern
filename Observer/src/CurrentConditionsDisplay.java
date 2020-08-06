@@ -1,3 +1,4 @@
+package src;
 
 public class CurrentConditionsDisplay implements Observer, DisplayElement{
 	private double tempereture;
