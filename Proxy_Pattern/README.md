@@ -10,7 +10,7 @@
     - `보호 프록시`는 호출하는 쪽의 권한에 따라서 객체에 있는 메소드에 대한 접근을 제어
 - 흐름 제어만 해야하며, 결과값에 대한 수정이 이루어져서는 안된다.
 
-![image](https://user-images.githubusercontent.com/50647845/159726201-a9facb5f-087e-4ae9-892c-154b4b20598f.png)
+<img alt="image" src="https://user-images.githubusercontent.com/50647845/159726201-a9facb5f-087e-4ae9-892c-154b4b20598f.png" width="600"/>
 
 - Proxy와 RealSubject 모두 Subject 인터페이스를 구현한다.
     - 두 객체에서 똑같은 인터페이스를 구현하기 때문에 RealSubject가 들어가야 할 자리에 Proxy를 대신 집어넣을 수 있다.
@@ -97,14 +97,14 @@ public class Main {
 
 ## 원격 프록시 예제
 
-![image](https://user-images.githubusercontent.com/50647845/159756020-2f188666-2de9-483d-82eb-8a6eac2aef44.png)
+<img alt="image" src="https://user-images.githubusercontent.com/50647845/159756020-2f188666-2de9-483d-82eb-8a6eac2aef44.png" width="600"/>
 
 - 모든 State 객체에는 뽑기 기계의 메소드를 호출하거나 상태를 변경할 때 사용하기 위한 뽑기 기계에 대한 레퍼런스가 들어가 있으나, State 객체가 전송될 때 뽑기 기계도 전부 직렬화시켜 같이 보내는 것은 바람직하지 않음
 - ex) Google Docs
 
 ## 가상 프록시 예제
 
-![image](https://user-images.githubusercontent.com/50647845/159747187-8dd4e578-3fa8-497c-bcc3-200aae6e9965.png)
+<img alt="image" src="https://user-images.githubusercontent.com/50647845/159747187-8dd4e578-3fa8-497c-bcc3-200aae6e9965.png" width="600"/>
 
 - 생성하는 데 많은 비용이 필요한 객체를 대신하는 역할로 쓰인다.
 - ex) Icon용 데이터를 네트워크를 통해서 가져와야 하기에 시간이 많이 걸리는 상황
@@ -113,7 +113,7 @@ public class Main {
 
 ## 보호 프록시 예제
 
-![image](https://user-images.githubusercontent.com/50647845/159746866-50ae1fae-4a24-4049-be90-1f64aaaaf33b.png)
+<img alt="image" src="https://user-images.githubusercontent.com/50647845/159746866-50ae1fae-4a24-4049-be90-1f64aaaaf33b.png" width="600"/>
 
 - 접근 권한을 바탕으로 객체에 대한 접근을 제어하는 역할로 쓰인다.
 - java.lang.refect 패키지에 프록시 기능이 내장되어 있다.
