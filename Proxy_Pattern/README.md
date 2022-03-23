@@ -20,6 +20,66 @@
 - Client는 Proxy를 통해서 RealSubject와 데이터를 주고 받는다.
 - Proxy는 RealSubject의 접근 제어역할도 수행한다.
 
+## 프록시 간단 예제
+
+```java
+public interface Image {
+    void show();
+}
+```
+
+```java
+public class RealImage implements Image {
+    private String name;
+
+    // 생성자
+    public RealImage(String name) {
+        this.name = name;
+        loadFromDisk(name); // 이거 오래 걸리는 작업이라면??
+    }
+
+    private void loadFromDisk(String name) {
+        System.out.println("Loading " + name);
+    }
+
+    @Override
+    public void show() {
+        System.out.println("show " + name);
+    }
+}
+```
+
+```java
+public class ProxyImage implements Image {
+    private RealImage realImage;
+    private String name;
+
+    public ProxyImage(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void show() { // 필요한 작업에서 실제 객체 생성
+        if (realImage == null) {
+            realImage = new RealImage(name);
+        }
+        realImage.show();
+    }
+}
+```
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Image image1 = new ProxyImage("ProxyImage1.png");//여기서 생서했으면 초반 작업이 오래걸림.
+        Image image2 = new ProxyImage("ProxyImage2.png");
+
+        image1.show();//필요할 때 그때 만들기
+        image2.show();
+    }
+}
+```
+
 ## 프록시 패턴의 장단점
 
 ### 장점
@@ -43,7 +103,7 @@
 
 ![image](https://user-images.githubusercontent.com/50647845/159747187-8dd4e578-3fa8-497c-bcc3-200aae6e9965.png)
 
-- 생성하는 데 많은 비용이 필요한 객체를 대신하는 역할로 쓰인다.  
+- 생성하는 데 많은 비용이 필요한 객체를 대신하는 역할로 쓰인다.
 - ex) Icon용 데이터를 네트워크를 통해서 가져와야 하기에 시간이 많이 걸리는 상황
 - 객체가 필요하게 되기 전까지 객체의 생성을 미룰 수 있게 하며, 객체 생선 전, 또는 객체 생성 도중에 객체를 대신하기도 한다.
 - 객체 생성이 완료되면 RealSubject에 요청을 직접 전달한다.
@@ -54,9 +114,10 @@
 
 - 접근 권한을 바탕으로 객체에 대한 접근을 제어하는 역할로 쓰인다.
 - java.lang.refect 패키지에 프록시 기능이 내장되어 있다.
-  - 해당 패키지를 이용하면 한 이상의 인터페이스를 구현하고 메소드 호출을 지정해준 클래스에 전달할 수 있는 프록시 클래스를 만들 수 있다.
+    - 해당 패키지를 이용하면 한 이상의 인터페이스를 구현하고 메소드 호출을 지정해준 클래스에 전달할 수 있는 프록시 클래스를 만들 수 있다.
 - 실제 프록시 클래스는 실행중에 생성되기 때문에 이러한 기술을 동적 프록시라고 부른다.
-- InvocationHandler는 프록시에 대해서 호출되는 모든 메소드에 대해 응답하는 역할을 수행하며, Proxy에서 메소드 호출을 받으면 InvocationHandler에 진짜로 수행해야 하는 작업을 부탁한다.
+- InvocationHandler는 프록시에 대해서 호출되는 모든 메소드에 대해 응답하는 역할을 수행하며, Proxy에서 메소드 호출을 받으면 InvocationHandler에 진짜로 수행해야 하는 작업을
+  부탁한다.
 
 ## 기타 프록시
 
@@ -83,6 +144,9 @@
     - ex) 자바5 CopyOnWriteArrayList에서 사용된다.
 
 ## 프록시 패턴 vs 데코레이터 패턴
+
+- 프록시 패턴의 구조는 데코레이터 패턴의 구조하고 비슷하지만, 용도가 다르다는 차이가 있다.
+- 데코레이터 패턴에서는 객체에 행동을 추가하지만 프록시 패턴에서는 접근을 제어한다.
 
 ### 참고자료
 
